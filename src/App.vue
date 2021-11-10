@@ -1,5 +1,7 @@
 <template>
 
+  <h1>Filter App</h1>
+
   <Nav />
 
   <div>
