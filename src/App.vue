@@ -1,8 +1,6 @@
 <template>
-  <Button text="Planets" />
-  <Button text="Galaxies" />
-  <Button text="Stars" />
-  <Button text="Nebulas" />
+
+  <Nav />
 
   <div>
     <img
@@ -24,29 +22,45 @@
   </div>
   <div>
 
-    <Image image-link="./src/images/Jupiter.jpg" image-text="image" />
-    <Image image-link="./images/Triangulum.jpg" image-text="image" />
-    <Image image-link="./images/HS-Hydra.jpg" image-text="image" />
-    <Image image-link="./images/OrionNebula.jpg" image-text="image" />
-
+    <img
+        src="./images/Jupiter.jpg"
+        alt="image"
+        class="images" />
+    <img
+        src="./images/Triangulum.jpg"
+        alt="image"
+        class="images" />
+    <img
+        src="./images/HS-Hydra.jpg"
+        alt="image"
+        class="images" />
+    <img
+        src="./images/OrionNebula.jpg"
+        alt="image"
+        class="images" />
   </div>
 
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Button from '@/components/Button/Button.vue';
-import Image from '@/components/Image/Image.vue';
+import Nav from '@/components/Navigation/Nav.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    Button,
-    Image
+    Nav,
   },
 });
 </script>
 
 <style>
+
+  .images {
+    width: 200px;
+    height: 200px;
+    padding: 5px;
+    margin-top: 20px;
+  }
 
 </style>

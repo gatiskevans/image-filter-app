@@ -1,6 +1,6 @@
 <template>
 
-  <img class="images" src="{{ imageLink }}" alt="{{ imageText }}" />
+  <img class="images" src="'{{ imageLink }}'" alt="{{ imageText }}" />
 
 </template>
 
