@@ -51,6 +51,12 @@ export default defineComponent({
   components: {
     Nav,
   },
+  data: () => ({
+    planets: ['Earth', 'Jupiter'],
+    galaxies: ['Andromeda', 'Triangulum'],
+    stars: ['Pleiades', 'Hydra'],
+    nebulas: ['Eagle', 'Orion'],
+  })
 });
 </script>
 
