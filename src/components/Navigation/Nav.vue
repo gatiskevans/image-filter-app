@@ -19,9 +19,10 @@ export default defineComponent ({
 <style>
 
     .nav {
+      display: inline-block;
       border: 1px solid black;
+      border-radius: 3px;
       padding: 10px 62px;
-      display: inline;
     }
 
 </style>
