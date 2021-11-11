@@ -1,6 +1,6 @@
 <template>
 
-  <img class="images" src="'{{ imageLink }}'" alt="{{ imageText }}" />
+  <img class="images" />
 
 </template>
 
@@ -15,12 +15,13 @@ export default defineComponent ({
 });
 </script>
 
-<style>
+<style scoped>
 
   .images {
     width: 200px;
     height: 200px;
     padding: 5px;
+    margin-top: 20px;
   }
 
 </style>

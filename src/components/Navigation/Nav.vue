@@ -1,8 +1,8 @@
 <template>
 
-  <a href="#" v-for="item in navItems" :key="item" class="nav">
-    {{ item }}
-  </a>
+  <button type="submit" class="nav" @submit.prevent="" >
+    {{ text }}
+  </button>
     
 </template>
 
@@ -13,9 +13,6 @@ export default defineComponent ({
     props: {
         text: String,
     },
-  data: () => ({
-    navItems: ['All', 'Planets', 'Galaxies', 'Stars', 'Nebulas'],
-  }),
 });
 </script>
 
