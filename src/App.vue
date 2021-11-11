@@ -12,29 +12,31 @@
       <Nav :text="nebulasLink()" @click="showNebulas"/>
     </div>
 
-    <div v-if="!planetsHidden" class="imageContainer">
-      <Image v-for="image in planetsLinks" :key="image" :src="image" alt="alt"/>
-      <br/>
-      <div class="imageName" v-for="name in planets" :key="name">{{ name }}</div>
-    </div>
+   <div v-if="!planetsHidden" class="imageContainer">
+     <div v-for="image in planets" :key="image" class="contents">
+       <Image :src="image.link" :alt="getAlt()" />
+       <span>{{ image.name }}</span>
+     </div>
+   </div>
 
     <div v-if="!galaxiesHidden" class="imageContainer">
-      <Image v-for="image in galaxiesLinks" :key="image" :src="image" alt="alt"/>
-      <br/>
-      <div class="imageName" v-for="name in galaxies" :key="name">{{ name }}</div>
+      <div v-for="image in galaxies" :key="image" class="contents">
+        <Image :src="image.link" :alt="getAlt()" />
+        <span>{{ image.name }}</span>
+      </div>
     </div>
 
     <div v-if="!starsHidden" class="imageContainer">
-      <Image v-for="image in starsLinks" :key="image" :src="image" alt="alt"/>
-      <br/>
-      <div class="imageName" v-for="name in stars" :key="name">{{ name }}</div>
+      <div v-for="image in stars" :key="image" class="contents">
+        <Image :src="image.link" :alt="getAlt()" />
+        <span>{{ image.name }}</span>
+      </div>
     </div>
 
     <div v-if="!nebulasHidden" class="imageContainer">
-      <Image v-for="image in nebulasLinks" :key="image" :src="image" alt="alt"/>
-      <br/>
-      <div class="names">
-        <span class="imageName" v-for="name in nebulas" :key="name">{{ name }}</span>
+      <div v-for="image in nebulas" :key="image" class="contents">
+        <Image :src="image.link" :alt="getAlt()" />
+        <span>{{ image.name }}</span>
       </div>
     </div>
 
@@ -53,41 +55,98 @@ export default defineComponent({
     Nav,
     Image,
   },
+  data: () => ({
+    navItems: ['All', 'Planets', 'Galaxies', 'Stars', 'Nebulas'],
+
+    planets: [
+      {
+        id: 1,
+        name: 'Earth',
+        link: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/240px-The_Earth_seen_from_Apollo_17.jpg",
+      },
+      {
+        id: 2,
+        name: 'Jupiter',
+        link: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg/240px-Jupiter_and_its_shrunken_Great_Red_Spot.jpg",
+      }
+    ],
+
+    galaxies: [
+      {
+        id: 1,
+        name: "Andromeda",
+        link: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Andromeda_Galaxy_560mm_FL.jpg/320px-Andromeda_Galaxy_560mm_FL.jpg",
+      },
+      {
+        id: 2,
+        name: "Triangulum",
+        link: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/VST_snaps_a_very_detailed_view_of_the_Triangulum_Galaxy.jpg/402px-VST_snaps_a_very_detailed_view_of_the_Triangulum_Galaxy.jpg"
+      }
+    ],
+
+    stars: [
+      {
+        id: 1,
+        name: "Pleiades Star Cluster",
+        link: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Pleiades_large.jpg/320px-Pleiades_large.jpg",
+      },
+      {
+        id: 2,
+        name: "Betelgeuse",
+        link: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Betelgeuse_captured_by_ALMA.jpg/480px-Betelgeuse_captured_by_ALMA.jpg"
+      }
+    ],
+
+    nebulas: [
+      {
+        id: 1,
+        name: "Eagle Nebula",
+        link: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Eagle_Nebula_from_ESO.jpg/480px-Eagle_Nebula_from_ESO.jpg",
+      },
+      {
+        id: 2,
+        name: "Orion Nebula",
+        link: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Orion_Nebula_-_Hubble_2006_mosaic_18000.jpg/240px-Orion_Nebula_-_Hubble_2006_mosaic_18000.jpg"
+      }
+    ],
+
+    alt: "image",
+
+    planetsHidden: false,
+    galaxiesHidden: false,
+    starsHidden: false,
+    nebulasHidden: false,
+
+  }),
+
   methods: {
 
     showAllImages() {
-      this.planetsHidden = false;
-      this.galaxiesHidden = false;
-      this.starsHidden = false;
-      this.nebulasHidden = false;
+      this.planetsHidden = this.galaxiesHidden = this.starsHidden = this.nebulasHidden = false;
     },
 
     showPlanets() {
       this.planetsHidden = false;
-      this.galaxiesHidden = true;
-      this.starsHidden = true;
-      this.nebulasHidden = true;
+      this.galaxiesHidden = this.starsHidden = this.nebulasHidden = true;
     },
 
     showGalaxies() {
-      this.planetsHidden = true;
       this.galaxiesHidden = false;
-      this.starsHidden = true;
-      this.nebulasHidden = true;
+      this.planetsHidden = this.starsHidden = this.nebulasHidden = true;
     },
 
     showStars() {
-      this.planetsHidden = true;
-      this.galaxiesHidden = true;
       this.starsHidden = false;
-      this.nebulasHidden = true;
+      this.planetsHidden = this.galaxiesHidden = this.nebulasHidden = true;
     },
 
     showNebulas() {
-      this.planetsHidden = true;
-      this.galaxiesHidden = true;
-      this.starsHidden = true;
       this.nebulasHidden = false;
+      this.planetsHidden = this.galaxiesHidden = this.starsHidden = true;
+    },
+
+    linkNames(item: number) {
+      return this.navItems[item];
     },
 
     all() {
@@ -109,69 +168,38 @@ export default defineComponent({
     nebulasLink() {
       return this.navItems[4];
     },
-  },
-  data: () => ({
-    navItems: ['All', 'Planets', 'Galaxies', 'Stars', 'Nebulas'],
-    alt: "image",
-    planets: ['Earth', 'Jupiter'],
-    planetsHidden: false,
-    galaxies: ['Andromeda', 'Triangulum'],
-    galaxiesHidden: false,
-    stars: ['Pleiades Star Cluster', 'Betelgeuse'],
-    starsHidden: false,
-    nebulas: ['Eagle Nebula', 'Orion Nebula'],
-    nebulasHidden: false,
-    planetsLinks: [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/240px-The_Earth_seen_from_Apollo_17.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg/240px-Jupiter_and_its_shrunken_Great_Red_Spot.jpg"
-    ],
-    galaxiesLinks: [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Andromeda_Galaxy_560mm_FL.jpg/320px-Andromeda_Galaxy_560mm_FL.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/VST_snaps_a_very_detailed_view_of_the_Triangulum_Galaxy.jpg/402px-VST_snaps_a_very_detailed_view_of_the_Triangulum_Galaxy.jpg"
-    ],
-    starsLinks: [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Pleiades_large.jpg/320px-Pleiades_large.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Betelgeuse_captured_by_ALMA.jpg/480px-Betelgeuse_captured_by_ALMA.jpg"
-    ],
-    nebulasLinks: [
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Eagle_Nebula_from_ESO.jpg/480px-Eagle_Nebula_from_ESO.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Orion_Nebula_-_Hubble_2006_mosaic_18000.jpg/240px-Orion_Nebula_-_Hubble_2006_mosaic_18000.jpg"
-    ]
-  })
+
+    getAlt() {
+      return this.alt;
+    }
+  }
 });
 </script>
 
 <style>
 
 .imageList {
-  border: 1px solid black;
-  border-radius: 5px;
   text-align: center;
-  width: 1000px;
   margin: auto;
+  width: 1400px;
   padding: 5px;
 }
 
 .imageContainer {
   border-radius: 3px;
-  padding: 20px;
   display: inline-block;
   border: 1px solid black;
-  margin: 5px;
+  margin: 0 5px 10px 5px;
+  padding-bottom: 10px;
 }
 
-.names {
-  width: 400px;
+.contents {
+  display: inline-block;
+  width: 40%;
 }
 
 .navigation {
   margin-bottom: 10px;
-}
-
-.imageName {
-  width: auto;
-  display: inline;
-  padding: 50px;
 }
 
 </style>

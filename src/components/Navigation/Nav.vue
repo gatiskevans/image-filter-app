@@ -16,7 +16,7 @@ export default defineComponent ({
 });
 </script>
 
-<style>
+<style scoped>
 
     .nav {
       display: inline-block;
