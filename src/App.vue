@@ -121,6 +121,14 @@ export default defineComponent({
 
   methods: {
 
+    showImages(key: number) {
+      if(key === 0) this.showAllImages();
+      if(key === 1) this.showPlanets();
+      if(key === 2) this.showGalaxies();
+      if(key === 3) this.showStars();
+      if(key === 4) this.showNebulas();
+    },
+
     showAllImages() {
       this.planetsHidden = this.galaxiesHidden = this.starsHidden = this.nebulasHidden = false;
     },
